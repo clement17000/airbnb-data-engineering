@@ -1,0 +1,19 @@
+# --- SECURITY ---
+*.json
+*.key
+*.pem
+.env
+gcp_key.json
+
+# --- SYSTEM FILES AND PYTHON ---
+__pycache__/
+*.pyc
+venv/
+.DS_Store
+.idea/
+.vscode/
+
+# --- DATA ---
+*.csv
+*.parquet
+data/
