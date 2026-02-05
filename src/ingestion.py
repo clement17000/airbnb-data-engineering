@@ -5,27 +5,16 @@ from datetime import datetime
 from google.cloud import storage
 from google.api_core.exceptions import Conflict
 
-# -- LOGIN CONFIGURATION --
-os.makedirs("logs/ingestion_logs/", exist_ok=True)
-log_filename = f"logs/ingestion_logs/ingestion_{datetime.now().strftime('%Y-%m-%d')}.log"
+import config
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(log_filename), # Écrit dans le fichier
-        logging.StreamHandler()            # Affiche dans le terminal
-    ]
-)
+# -- LOGIN CONFIGURATION --
+logging = config.setup_logging("ingestion")
 
 
 
 # -- PROJECT CONFIGURATION --
-GCP_KEY_PATH = "gcp_key.json"
-DATA_URL = "http://data.insideairbnb.com/france/nouvelle-aquitaine/bordeaux/2025-09-18/visualisations/listings.csv"
-BUCKET_NAME = "airbnb-data-engineering-raw-cg"
-LOCAL_FILE = "../data/listings_bdx.csv"
-GCS_PATH = "raw/listings_bdx.csv"
+local_file_path = config.DATA_DIR / "listings_bdx.csv"
+gcs_path = "raw/listings_bdx.csv"
 
 def upload_to_gcs():
     """
@@ -41,37 +30,38 @@ def upload_to_gcs():
     """
     logging.info("Starting injection pipeline.")
 
-    if not os.path.exists(GCP_KEY_PATH):
-        logging.error(f"Key '{GCP_KEY_PATH}' not found ! Ingestion STOP.")
+    if not os.path.exists(config.GCP_KEY_PATH):
+        logging.error(f"Key '{config.GCP_KEY_PATH}' not found ! Ingestion STOP.")
         return
 
-    logging.info(f"Loading Data from {DATA_URL}...")
+    logging.info(f"Loading Data from {config.DATA_URL}...")
     try:
-        response = requests.get(DATA_URL, stream=True)
+        response = requests.get(config.DATA_URL, stream=True)
         response.raise_for_status()
 
-        os.makedirs("../data", exist_ok=True)
-        with open(LOCAL_FILE, 'wb') as f:
+        config.DATA_DIR.mkdir(parents=True, exist_ok=True)
+        with open(local_file_path, 'wb') as f:
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
         logging.info("Dowload execute with succes !")
     except Exception as e:
             logging.error(f"Dowload Error : {e}")
+            return
     
     try:
         logging.info("Connexion to Google Cloud Storage...")
-        client = storage.Client.from_service_account_json(GCP_KEY_PATH)
+        client = storage.Client()
         
         try:
-            bucket = client.create_bucket(BUCKET_NAME, location='EU')
-            logging.info(f"Bucket {BUCKET_NAME} created.")
+            bucket = client.create_bucket(config.BUCKET_NAME, location='EU')
+            logging.info(f"Bucket {config.BUCKET_NAME} created.")
         except Conflict:
-            bucket = client.get_bucket(BUCKET_NAME)
-            logging.warning(f"This bucket {BUCKET_NAME} already exist.")
+            bucket = client.get_bucket(config.BUCKET_NAME)
+            logging.warning(f"This bucket {config.BUCKET_NAME} already exist.")
         
-        logging.info(f"Send file to gs://{BUCKET_NAME}/{GCS_PATH}...")
-        blob = bucket.blob(GCS_PATH)
-        blob.upload_from_filename(LOCAL_FILE)
+        logging.info(f"Send file to gs://{config.BUCKET_NAME}/{gcs_path}...")
+        blob = bucket.blob(gcs_path)
+        blob.upload_from_filename(local_file_path)
 
         logging.info(f"SUCCESS: Pipeline ended without error !")
    
