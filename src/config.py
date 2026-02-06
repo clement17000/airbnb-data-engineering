@@ -16,7 +16,7 @@ SRC_DIR = PROJECT_ROOT / "src"
 SQL_DIR = SRC_DIR / "sql" 
 
 # On définit les fichiers spécifiques
-GCP_KEY_PATH = PROJECT_ROOT / "gcp_key.json"
+GCP_KEY_PATH = SRC_DIR / "gcp_key.json"
 SQL_INIT_TABLE_FILE = SQL_DIR / "create_tables.sql"
 
 # --- 2. CONSTANTES GLOBALES ---

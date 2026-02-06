@@ -1,0 +1,33 @@
+2026-02-06 11:34:56,053 - INFO - Starting injection pipeline.
+2026-02-06 11:34:56,053 - ERROR - Key 'C:\FREELANCE\FORMATIONS\Projets\airbnb-data-engineering\gcp_key.json' not found ! Ingestion STOP.
+2026-02-06 11:36:21,480 - INFO - Starting injection pipeline.
+2026-02-06 11:36:21,480 - INFO - Loading Data from http://data.insideairbnb.com/france/nouvelle-aquitaine/bordeaux/2025-09-18/visualisations/listings.csv...
+2026-02-06 11:36:22,402 - INFO - Dowload execute with succes !
+2026-02-06 11:36:22,403 - INFO - Connexion to Google Cloud Storage...
+2026-02-06 11:36:23,487 - WARNING - This bucket airbnb-data-engineering-raw-cg already exist.
+2026-02-06 11:36:23,487 - INFO - Send file to gs://airbnb-data-engineering-raw-cg/raw/listings_bdx.csv...
+2026-02-06 11:36:23,929 - INFO - SUCCESS: Pipeline ended without error !
+2026-02-06 11:37:26,576 - INFO - Starting creation of Schema & Tables.
+2026-02-06 11:37:26,644 - INFO - Connexion to BigQuery established.
+2026-02-06 11:37:26,651 - INFO - SQL File read: C:\FREELANCE\FORMATIONS\Projets\airbnb-data-engineering\src\sql\create_tables.sql
+2026-02-06 11:37:27,159 - ERROR - ERROR : 403 POST https://bigquery.googleapis.com/bigquery/v2/projects/airbnb-data-cg/jobs?prettyPrint=false: Access Denied: Project airbnb-data-cg: User does not have bigquery.jobs.create permission in project airbnb-data-cg.
+
+Location: None
+Job ID: 943bd122-fa3f-4571-9dba-ff63cbb0a7d6
+
+2026-02-06 11:43:40,823 - INFO - Starting creation of Schema & Tables.
+2026-02-06 11:43:40,890 - INFO - Connexion to BigQuery established.
+2026-02-06 11:43:40,890 - INFO - SQL File read: C:\FREELANCE\FORMATIONS\Projets\airbnb-data-engineering\src\sql\create_tables.sql
+2026-02-06 11:43:43,857 - INFO - SUCCES : Dataset & Table has been updated/created.
+2026-02-06 11:46:16,658 - INFO - Starting creation of Schema & Tables.
+2026-02-06 11:46:16,726 - INFO - Connexion to BigQuery established.
+2026-02-06 11:46:16,732 - INFO - SQL File read: C:\FREELANCE\FORMATIONS\Projets\airbnb-data-engineering\src\sql\create_tables.sql
+2026-02-06 11:46:17,270 - ERROR - ERROR : 400 Syntax error: Expected ")" but got identifier "allow_quoted_newlines" at [11:5]; reason: invalidQuery, location: query, message: Syntax error: Expected ")" but got identifier "allow_quoted_newlines" at [11:5]
+
+Location: US
+Job ID: 269eda71-e1ab-4cc5-9ca8-ae602c9537f9
+
+2026-02-06 11:46:39,717 - INFO - Starting creation of Schema & Tables.
+2026-02-06 11:46:39,794 - INFO - Connexion to BigQuery established.
+2026-02-06 11:46:39,802 - INFO - SQL File read: C:\FREELANCE\FORMATIONS\Projets\airbnb-data-engineering\src\sql\create_tables.sql
+2026-02-06 11:46:42,591 - INFO - SUCCES : Dataset & Table has been updated/created.

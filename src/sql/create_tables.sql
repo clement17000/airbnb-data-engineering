@@ -7,5 +7,6 @@ CREATE OR REPLACE EXTERNAL TABLE airbnb.raw_listings
 OPTIONS(
     format='CSV',
     uris=['gs://airbnb-data-engineering-raw-cg/raw/listings_bdx.csv'],
-    skip_leading_rows = 1
+    skip_leading_rows = 1,
+    allow_quoted_newlines = true
 );
