@@ -1,0 +1,8 @@
+2026-02-07 10:14:34,046 - INFO - Starting creation of Schema & Tables.
+2026-02-07 10:14:34,116 - INFO - Connexion to BigQuery established.
+2026-02-07 10:14:34,122 - INFO - SQL File read: C:\FREELANCE\FORMATIONS\Projets\airbnb-data-engineering\src\sql\create_tables.sql
+2026-02-07 10:14:36,679 - INFO - SUCCES : Dataset & Table has been updated/created.
+2026-02-07 10:50:36,960 - INFO - Starting creation of Schema & Tables.
+2026-02-07 10:50:37,029 - INFO - Connexion to BigQuery established.
+2026-02-07 10:50:37,029 - INFO - SQL File read: C:\FREELANCE\FORMATIONS\Projets\airbnb-data-engineering\src\sql\create_tables.sql
+2026-02-07 10:50:39,563 - INFO - SUCCES : Dataset & Table has been updated/created.

@@ -13,10 +13,12 @@ PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 LOGS_DIR = PROJECT_ROOT / "logs"
 SRC_DIR = PROJECT_ROOT / "src"
+
 SQL_DIR = SRC_DIR / "sql" 
 
 # On définit les fichiers spécifiques
 GCP_KEY_PATH = SRC_DIR / "gcp_key.json"
+
 SQL_INIT_TABLE_FILE = SQL_DIR / "create_tables.sql"
 
 # --- 2. CONSTANTES GLOBALES ---
@@ -34,8 +36,6 @@ else:
 def setup_logging(script_name):
     # On utilise le chemin dynamique
     specific_log_dir = LOGS_DIR / f"{script_name}_logs"
-    
-    # Pathlib permet de créer les dossiers facilement (parents=True crée toute l'arborescence)
     specific_log_dir.mkdir(parents=True, exist_ok=True)
 
     log_filename = specific_log_dir / f"{script_name}_{datetime.now().strftime('%Y-%m-%d')}.log"
@@ -44,7 +44,7 @@ def setup_logging(script_name):
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s',
         handlers=[
-            logging.FileHandler(log_filename), # Pathlib est compatible ici
+            logging.FileHandler(log_filename),
             logging.StreamHandler()
         ],
         force=True

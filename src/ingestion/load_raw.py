@@ -1,9 +1,12 @@
 import os
+import sys
 import requests
 import logging
 from datetime import datetime
 from google.cloud import storage
 from google.api_core.exceptions import Conflict
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import config
 
