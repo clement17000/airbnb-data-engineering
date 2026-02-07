@@ -7,7 +7,7 @@ from google.cloud import bigquery
 import config
 
 # -- LOGIN CONFIGURATION --
-logging = config.setup_logging("ingestion")
+logging = config.setup_logging("init_db")
 
 def create_schema_and_tables():
     logging.info("Starting creation of Schema & Tables.")
